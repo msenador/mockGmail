@@ -46,10 +46,10 @@ class SearchAll extends React.Component {
         }
       }
 
-    handleChange = (e) => {
-      this.setState({formInput: e.target.value})
-      console.log(this.state.formInput)
-    }
+    // handleChange = (e) => {
+    //   this.setState({formInput: e.target.value})
+    //   console.log(this.state.formInput)
+    // }
 
     handleSubmit = (e) => {
       e.preventDefault();
@@ -58,9 +58,7 @@ class SearchAll extends React.Component {
       this.state.emails.map(subjects => {
         if(subjects.subject === e.target.searchSubject.value){
         return (
-          
-          <li>Subjects: {subjects.subject}
-          </li>
+          <li>Subjects: {subjects.subject}</li>
           )
         }
       })
@@ -82,7 +80,10 @@ class SearchAll extends React.Component {
         <form onSubmit={this.handleSubmit}>
         {/* // <form> */}
         <h3>*Search by subject*</h3>
-        <input type='text' id='searchSubject' placeholder='Search by subject' onChange={this.handleChange}/>
+        <input type='text' id='searchSubject' placeholder='Search by subject' 
+        // onChange={this.handleChange}
+
+        />
         <button>Search</button>
         {/* <u>
           {

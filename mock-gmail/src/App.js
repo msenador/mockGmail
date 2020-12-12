@@ -50,7 +50,7 @@ class App extends React.Component {
           <Route exact path='/AllMessages'><AllMessages allEmails={this.state.emails}/></Route>
           <Route path='/AllMessages/:personId'><MessageDetails info={this.state.emails}/></Route>
           <Route exact path='/Search'><SearchAll search={ this.state.emails }/></Route>
-          <Route exact path='/SendEmail'><ComposeEmail/></Route>
+          <Route exact path='/SendEmail'><ComposeEmail props={this.state.emails}/></Route>
 
       </Switch>
       </Router>

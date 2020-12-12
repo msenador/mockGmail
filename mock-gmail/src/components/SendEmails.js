@@ -2,13 +2,16 @@ import React, { Component } from 'react'
 // import axios from 'axios'
 
 export class ComposeEmail extends Component{
-    constructor(props){
-        super(props)
+    constructor({props}){
+        super({props})
         this.state = {
-            emails: [
-            {recipientCompose: '',
-            subjectCompose: '',
-            bodyCompose: ''}
+            emailSender: [
+            {
+            sender: '',
+            recipient: '',
+            subject: '',
+            message: '',
+             }
             ]
         }
     }
@@ -19,20 +22,28 @@ export class ComposeEmail extends Component{
 
     submitHandler = (e) => {
         e.preventDefault()
-        console.log('recipientCompose:' + this.state.recipientCompose )
-        console.log('subjectCompose:' + this.state.subjectCompose )
-        console.log('bodyCompose:' + this.state.bodyCompose )
-        const url = 'http://localhost:3001/emails'
+        console.log('sender:' + this.state.sender)
+        console.log('recipient:' + this.state.recipient )
+        console.log('subject:' + this.state.subject )
+        console.log('message:' + this.state.message )
+        const url = 'http://localhost:3001/send'
         const data = {
-            recipientCompose: this.state.recipientCompose,
-            subjectCompose: this.state.subjectCompose,
-            bodyCompose: this.state.bodyCompose
+            sender: this.state.sender,
+            recipient: this.state.recipient,
+            subject: this.state.subject,
+            message: this.state.message,
         }
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),
-            headers: {'Content-Type': 'application/json'}})
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }})
             .then(res => res.json())
+            .catch(error => {
+                console.error('There was an error!')
+            })
         alert('EMAIL HAS BEEN SENT!')
             
     }
@@ -66,21 +77,25 @@ export class ComposeEmail extends Component{
 
 
     render(){
-        const { recipientCompose, subjectCompose, bodyCompose } = this.state
+        const { sender, recipient, subject, message } = this.state
         return(
             <div>
               <form onSubmit={this.submitHandler}>
                 <div>
+                    Sender:
+                    <input type='text' name='sender' value={sender} placeholder='Enter sender' onChange={this.changeHandler}/>
+                </div>
+                <div>
                     Recipient: 
-                    <input type='text' name='recipientCompose' value={recipientCompose} onChange={this.changeHandler}/>
+                    <input type='text' name='recipient' value={recipient} placeholder='Enter recipient' onChange={this.changeHandler}/>
                 </div>
                 <div>
                     Subject: 
-                    <input type='text' name='subjectCompose' value={subjectCompose} onChange={this.changeHandler}/>
+                    <input type='text' name='subject' value={subject} placeholder='Enter subject' onChange={this.changeHandler}/>
                 </div>
                 <div>
                     Body: 
-                    <input type='text' name='bodyCompose' value={bodyCompose} onChange={this.changeHandler}/>
+                    <input type='text' name='message' value={message} placeholder='Enter body' onChange={this.changeHandler}/>
                 </div>
                 <button type='submit'>Send Email</button>
               </form>

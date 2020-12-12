@@ -1,7 +1,5 @@
 import React from 'react'
-import { Switch, Link, Route, useRouteMatch } from 'react-router-dom'
-import MessageDetails from './MessageDetails'
-
+import { Link, useRouteMatch } from 'react-router-dom'
 
 const AllMessages = ({allEmails}) => {
     const match = useRouteMatch()
