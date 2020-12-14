@@ -7,6 +7,7 @@ export class ComposeEmail extends Component{
         this.state = {
             emailSender: [
             {
+            id: 20,
             sender: '',
             recipient: '',
             subject: '',
@@ -26,12 +27,14 @@ export class ComposeEmail extends Component{
         console.log('recipient:' + this.state.recipient )
         console.log('subject:' + this.state.subject )
         console.log('message:' + this.state.message )
+        console.log('emails' + this.state.emailSender.emails)
         const url = 'http://localhost:3001/send'
         const data = {
             sender: this.state.sender,
             recipient: this.state.recipient,
             subject: this.state.subject,
             message: this.state.message,
+            id: this.state.id
         }
         fetch(url, {
             method: 'POST',
